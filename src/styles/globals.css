@@ -1,0 +1,296 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SELF-HOSTED TYPOGRAPHY (NFR-001: ZERO EXTERNAL RUNTIME REQUESTS)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Orbitron";
+  src: url("/fonts/Orbitron-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/Rajdhani-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/Rajdhani-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/Rajdhani-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/fonts/Rajdhani-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Share Tech Mono";
+  src: url("/fonts/ShareTechMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   OBSIDIAN PARALLAX DESIGN SYSTEM TOKENS (UIUX.md)
+   ========================================================================== */
+
+:root {
+  --bg: #04070d;
+  --bg-elevated: #070d18;
+  --panel: #0a1322;
+  --panel-hi: #101f36;
+  --border: rgba(62, 224, 255, 0.22);
+  --border-hi: rgba(62, 224, 255, 0.58);
+  --cy: #3ee0ff;
+  --amber: #ffb454;
+  --red: #ff3b4e;
+  --grn: #39ff9d;
+  --text: #e6f1ff;
+  --text-mut: #8da4c4;
+  --text-dim: #5d7494;
+
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Share Tech Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --radius: 2px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --glow-cy: 0 0 24px rgba(62, 224, 255, 0.14), inset 0 0 1px rgba(62, 224, 255, 0.35);
+  --glow-amber: 0 0 24px rgba(255, 180, 84, 0.16), inset 0 0 1px rgba(255, 180, 84, 0.4);
+  --glow-red: 0 0 28px rgba(255, 59, 78, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(62, 224, 255, 0.075), transparent 40%),
+    radial-gradient(circle at 82% 84%, rgba(255, 180, 84, 0.055), transparent 42%),
+    linear-gradient(rgba(62, 224, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 224, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans-tech {
+  font-family: var(--font-sans);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+}
+
+/* Accessible Focus Ring (WCAG 2.2 AA - NFR-002) */
+:focus-visible {
+  outline: 2px solid var(--cy);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(62, 224, 255, 0.2);
+}
+
+/* Atmospheric CRT Scanlines & Film Grain Overlay */
+.aegis-scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(4, 7, 13, 0.24) 3px,
+    rgba(62, 224, 255, 0.018) 4px
+  );
+  opacity: 0.7;
+}
+
+.aegis-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+}
+
+/* Animations */
+@keyframes aegisPowerOn {
+  0% {
+    opacity: 0.35;
+    filter: brightness(1.45) contrast(1.2);
+  }
+  45% {
+    opacity: 0.88;
+    filter: brightness(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+  }
+}
+
+@keyframes aegisShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes aegisArcFlow {
+  0% {
+    stroke-dashoffset: 160;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes aegisPulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes aegisTicker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-power-on {
+  animation: aegisPowerOn 240ms var(--ease-out-expo) forwards;
+}
+
+.animate-gate-shake {
+  animation: aegisShake 360ms var(--ease-out-expo);
+}
+
+.animate-arc-flow {
+  stroke-dasharray: 8 6;
+  animation: aegisArcFlow 5.5s linear infinite;
+}
+
+.animate-blip-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: aegisPulse 2.4s ease-in-out infinite;
+}
+
+.animate-ticker-scroll {
+  animation: aegisTicker 38s linear infinite;
+}
+
+/* Reduced Motion Override (NFR-002) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-power-on,
+  .animate-gate-shake,
+  .animate-arc-flow,
+  .animate-blip-pulse,
+  .animate-ticker-scroll {
+    animation: none !important;
+  }
+
+  .aegis-scanlines,
+  .aegis-grain {
+    opacity: 0.15 !important;
+  }
+}
